@@ -1,6 +1,6 @@
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+datasource db{
+  provider = "postgresql
+  url = env("postgresql://stockflow_db_3fco_user:HuYGcktIzVFCqaSQ55JgPi8qtmkDWCEk@dpg-d52ll8je5dus73eo2670-a/stockflow_db_3fco")
 }
 
 generator client {
