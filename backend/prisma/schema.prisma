@@ -1,37 +1,39 @@
-datasource db{
-  provider = "postgresql
-  url = env("postgresql://stockflow_db_3fco_user:HuYGcktIzVFCqaSQ55JgPi8qtmkDWCEk@dpg-d52ll8je5dus73eo2670-a/stockflow_db_3fco")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model Organization {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
   users     User[]
   products  Product[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int          @id @default(autoincrement())
+  email     String       @unique
   password  String
   orgId     Int
   org       Organization @relation(fields: [orgId], references: [id])
-  createdAt DateTime @default(now())
+  createdAt DateTime     @default(now())
 }
 
 model Product {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
   name      String
   sku       String
   quantity  Int
+  costPrice Float?
+  sellPrice Float?
   lowStock  Int?
   orgId     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  org       Organization @relation(fields: [orgId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
-
