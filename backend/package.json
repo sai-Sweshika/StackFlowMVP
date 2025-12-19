@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build":"npm install && npx prisma generate",
     "start": "node src/server.js"
   },
   "keywords": [],
